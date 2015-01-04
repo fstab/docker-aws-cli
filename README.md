@@ -9,7 +9,7 @@ Background
 The `aws` command is a command line interface for [Amazon's Web Services](http://aws.amazon.com),
 like [EC2](http://aws.amazon.com/ec2), [S3](http://aws.amazon.com/s3/), etc.
 
-The _docker-aws-cli_ image contains all dependencies needed to run `aws`. That way you can run `aws` in a [Docker](https://docker.io) container without setting the `aws` dependencies on the host system.
+The _docker-aws-cli_ creates a [Docker](https://docker.io) image containing all dependencies needed to run `aws`. That way, you can run `aws` in a [Docker](https://docker.io) container without setting the `aws` dependencies on the host system.
 
 Build and Run
 -------------
