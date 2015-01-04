@@ -17,4 +17,5 @@ RUN \
     mkdir aws && \
     virtualenv aws/env && \
     ./aws/env/bin/pip install awscli && \
-    echo 'source $HOME/aws/env/bin/activate' >> .bashrc
+    echo 'source $HOME/aws/env/bin/activate' >> .bashrc && \
+    echo 'complete -C aws_completer aws' >> .bashrc

@@ -38,4 +38,4 @@ The container will start a `bash` shell with the [aws](http://docs.aws.amazon.co
 Getting started with the AWS CLI
 --------------------------------
 
-See the [AWS command line interface documentation](http://aws.amazon.com/documentation/cli/).
+See the [AWS command line interface documentation](http://aws.amazon.com/documentation/cli/) and the [aws-cli GitHub page](https://github.com/aws/aws-cli).
