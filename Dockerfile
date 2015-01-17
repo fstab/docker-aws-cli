@@ -5,13 +5,20 @@ RUN apt-get update && \
     apt-get upgrade -y
 
 RUN apt-get install -y \
+    ssh \
     python \
     python-pip \
     python-virtualenv
 
 RUN adduser --disabled-login --gecos '' aws
-USER aws
 WORKDIR /home/aws
+
+RUN mkdir examples
+ADD examples/start.sh /home/aws/examples/start.sh
+ADD examples/terminate.sh /home/aws/examples/terminate.sh
+RUN chown -R aws:aws /home/aws/examples
+
+USER aws
 
 RUN \
     mkdir aws && \
