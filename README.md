@@ -36,13 +36,13 @@ Build from Source
 
    ```bash
    cd docker-aws-cli
-   docker build -t="fstab/aws-cli:v1" .
+   docker build -t="fstab/aws-cli" .
    ```
 
 5. Run a docker container with that image
 
    ```bash
-   docker run -t -i fstab/aws-cli:v1
+   docker run -t -i fstab/aws-cli
    ```
 
 Getting started with the AWS CLI
