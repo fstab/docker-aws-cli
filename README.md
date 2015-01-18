@@ -38,4 +38,8 @@ The container will start a `bash` shell with the [aws](http://docs.aws.amazon.co
 Getting started with the AWS CLI
 --------------------------------
 
-See the [AWS command line interface documentation](http://aws.amazon.com/documentation/cli/) and the [aws-cli GitHub page](https://github.com/aws/aws-cli).
+In the `examples` directory in the Docker container,
+you find a `start.sh` script that can be used to start your first [EC2](http://aws.amazon.com/ec2) instance.
+See [examples](examples) for more info.
+
+For documentation on the AWS CLI, see the [AWS command line interface documentation](http://aws.amazon.com/documentation/cli/) and the [aws-cli GitHub page](https://github.com/aws/aws-cli).

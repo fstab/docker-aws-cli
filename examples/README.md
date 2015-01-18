@@ -4,7 +4,7 @@ AWS CLI Example Script
 The example script uses the [aws cli](http://aws.amazon.com/cli) to set up an
 [EC2](http://aws.amazon.com/ec2) instance that is accessible via HTTP(S) and SSH.
 
-It is installed in the `examples` directory in the [fstab/aws-cli](https://github.com/fstab/docker-aws-cli) Docker image.
+The script is provided in the `examples` directory in the [fstab/aws-cli](https://github.com/fstab/docker-aws-cli) Docker image.
 
 How To
 ------
