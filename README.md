@@ -21,7 +21,7 @@ A pre-built image is available on [Docker Hub](https://registry.hub.docker.com/u
 The container will start a `bash` shell with the [aws](http://docs.aws.amazon.com/cli/latest/reference/) command ready to use.
 
 In the `examples` directory in the Docker container, you find a `start.sh` script that can be used
-to start your first [EC2](http://aws.amazon.com/ec2) instance. See [examples](examples) for more info.
+to start your first [EC2](http://aws.amazon.com/ec2) instance. See [examples](https://github.com/fstab/docker-aws-cli/tree/master/examples) for more info.
 
 Build from Source
 -----------------
@@ -48,6 +48,6 @@ Build from Source
 Getting started with the AWS CLI
 --------------------------------
 
-The script `examples/start.sh` can be used to set up an [EC2](http://aws.amazon.com/ec2) instance. See [examples](examples) for more info.
+The script `examples/start.sh` can be used to set up an [EC2](http://aws.amazon.com/ec2) instance. See [examples](https://github.com/fstab/docker-aws-cli/tree/master/examples) for more info.
 
 For documentation on the AWS CLI, see the [AWS command line interface documentation](http://aws.amazon.com/documentation/cli/) and the [aws-cli GitHub page](https://github.com/aws/aws-cli).
