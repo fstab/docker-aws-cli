@@ -23,7 +23,7 @@ Then, start up the [EC2](http://aws.amazon.com/ec2) instance as follows:
     cd examples
     ./start.sh
 
-When everything is up, the script will print the IP address for accessing the EC2 instance.
+When the EC2 instance is started, the script will print the public IP address.
 
 In order to clean everything up, run
 
