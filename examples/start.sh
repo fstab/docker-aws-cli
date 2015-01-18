@@ -2,7 +2,7 @@
 
 set -e
 
-export TAG_NAME="Created-By-Example-Script"
+export TAG_NAME="example-script"
 
 function json_get {
     python -c "import json, sys; data=json.load(sys.stdin); print data$1;"
@@ -60,7 +60,7 @@ SUBNET_ID=$(create_or_get "subnet" "['Subnet']['SubnetId']" \
 echo "$SUBNET_ID"
 
 #########################################################################
-echo -n "Configuring security group: Allowing SSH and HTTPS... "
+echo -n "Configuring security group: Allowing SSH and HTTP(S)... "
 #########################################################################
 
 SECURITY_GROUP_JSON=$(aws ec2 describe-security-groups --filters "Name=vpc-id,Values=$VPC_ID")
@@ -74,6 +74,15 @@ then
         --group-id "$SECURITY_GROUP_ID" \
         --protocol tcp \
         --port 22 \
+        --cidr 0.0.0.0/0
+fi
+
+if [[ "$SECURITY_GROUP_JSON" != *"\"ToPort\": 80,"* ]]
+then
+    aws ec2 authorize-security-group-ingress \
+        --group-id "$SECURITY_GROUP_ID" \
+        --protocol tcp \
+        --port 80 \
         --cidr 0.0.0.0/0
 fi
 
@@ -184,6 +193,7 @@ then
         --security-group-ids $SECURITY_GROUP_ID \
         --associate-public-ip-address \
         --key-name "$TAG_NAME" \
+        --user-data file://init-instance.script \
         | json_get "['Instances'][0]['InstanceId']")
     tag "$INSTANCE_ID"
 elif [[ $NUMBER_OF_NON_TERMINATED -eq 1 ]]
@@ -197,7 +207,7 @@ fi
 echo "$INSTANCE_ID"
 
 #########################################################################
-echo "Waiting for instance. This may take a few minutes... "
+echo "Waiting for instance. This may take a few seconds... "
 #########################################################################
 
 INSTANCE_STATE="pending"
@@ -219,5 +229,8 @@ echo Started EC2 instance with IP address "$PUBLIC_IP"
 if [ -e "${TAG_NAME}.pem" ]
 then
     echo "As soon as the SSH daemon is started, you can log in with 'ssh -i ${TAG_NAME}.pem ec2-user@${PUBLIC_IP}'."
-    echo "It will take a few minutes until the SSH daemon is started."
+    echo "If you see 'Connection refused': No worries, it will take a few minutes until the SSH daemon is started. Try again."
+    echo "The nginx Web server is installed in the background after the first boot."
+    echo "When you are logged in with SSH on ${PUBLIC_IP}, you can view the progress with 'tail -f /var/log/init-instance.log'."
+    echo "Once the Web server is up, you can access it on http(s)://${PUBLIC_IP}"
 fi

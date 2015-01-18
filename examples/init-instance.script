@@ -1,0 +1,52 @@
+#!/bin/bash
+
+LOGFILE=/var/log/init-instance.log
+
+echo 'initializing instance...' > $LOGFILE
+
+function run {
+    echo "#######################################" >> $LOGFILE
+    echo "> $@" >> $LOGFILE
+    echo "#######################################" >> $LOGFILE
+    $@ >> $LOGFILE 2>&1
+    echo >> $LOGFILE
+}
+
+run yum -y update
+run yum install -y nginx
+
+run openssl req \
+  -x509 -nodes -days 365 \
+  -subj '/C=US/ST=Oregon/L=Portland/CN=www.example.com' \
+  -newkey rsa:2048 -keyout /etc/nginx/cert.key -out /etc/nginx/cert.crt
+
+echo "#######################################" >> $LOGFILE
+echo "> cat >> /etc/nginx/conf.d/ssl.conf ..." >> $LOGFILE
+echo "#######################################" >> $LOGFILE
+echo >> $LOGFILE
+
+cat >> /etc/nginx/conf.d/ssl.conf <<EOF
+server {
+    listen       443;
+    server_name  localhost;
+    root         html;
+
+    ssl                  on;
+    ssl_certificate      cert.crt;
+    ssl_certificate_key  cert.key;
+
+    ssl_session_timeout  5m;
+
+    ssl_protocols  SSLv2 SSLv3 TLSv1;
+    ssl_ciphers  HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers   on;
+
+    location / {
+    }
+}
+EOF
+
+run service nginx start
+
+echo "#######################################" >> $LOGFILE
+echo "Done. Nginx server started." >> $LOGFILE

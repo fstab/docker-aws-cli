@@ -2,7 +2,7 @@
 
 set -e
 
-export TAG_NAME="Created-By-Example-Script"
+export TAG_NAME="example-script"
 
 function get_ids {
     aws ec2 describe-tags --filters "Name=value,Values=$TAG_NAME" "Name=resource-type,Values=$1" \
