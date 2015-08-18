@@ -1,5 +1,9 @@
-FROM ubuntu:14.04
+FROM ubuntu:14.04.3
 MAINTAINER Fabian Stäber, fabian@fstab.de
+
+#####################################################################################
+# Current version is aws-cli/1.7.45 Python/2.7.6
+#####################################################################################
 
 RUN apt-get update && \
     apt-get upgrade -y
