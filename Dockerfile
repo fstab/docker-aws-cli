@@ -10,11 +10,19 @@ ENV LAST_UPDATE=2016-08-05
 RUN apt-get update && \
     apt-get upgrade -y
 
+# man and less are needed to view 'aws <command> help'
+# ssh allows us to log in to new instances
+# vim is useful to write shell scripts
+# python* is needed to install aws cli using pip install
+
 RUN apt-get install -y \
+    less \
+    man \
     ssh \
     python \
     python-pip \
-    python-virtualenv
+    python-virtualenv \
+    vim
 
 RUN adduser --disabled-login --gecos '' aws
 WORKDIR /home/aws
