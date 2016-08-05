@@ -1,8 +1,10 @@
-FROM ubuntu:14.04.3
+FROM ubuntu:16.04
 MAINTAINER Fabian Stäber, fabian@fstab.de
 
+ENV LAST_UPDATE=2016-08-05
+
 #####################################################################################
-# Current version is aws-cli/1.7.45 Python/2.7.6
+# Current version is aws-cli/1.10.53 Python/2.7.12
 #####################################################################################
 
 RUN apt-get update && \
