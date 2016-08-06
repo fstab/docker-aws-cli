@@ -49,6 +49,11 @@ echo -n "Creating VPC... "
 VPC_ID=$(create_or_get "vpc" "['Vpc']['VpcId']" \
     "aws ec2 create-vpc --cidr-block 10.0.0.0/24")
 
+# Allow instances to resolve their own hostname via dns,
+# because some instances do not have the hostname set in /etc/hosts
+# and some tools need to resolve the hostname.
+aws ec2 modify-vpc-attribute --vpc-id ${VPC_ID} --enable-dns-hostnames > /dev/null
+
 echo "$VPC_ID"
 
 #########################################################################
