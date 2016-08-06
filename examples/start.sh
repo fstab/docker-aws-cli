@@ -2,6 +2,8 @@
 
 set -e
 
+# TODO: This script can be simplified by replacing the json_get function with the --query option of aws cli (http://docs.aws.amazon.com/cli/latest/userguide/controlling-output.html#controlling-output-filter)
+
 export TAG_NAME="example-script"
 export SCRIPT_DIR=$(realpath $(dirname $0))
 
