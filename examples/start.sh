@@ -3,6 +3,7 @@
 set -e
 
 export TAG_NAME="example-script"
+export SCRIPT_DIR=$(realpath $(dirname $0))
 
 function json_get {
     python -c "import json, sys; data=json.load(sys.stdin); print data$1;"
@@ -193,7 +194,7 @@ then
         --security-group-ids $SECURITY_GROUP_ID \
         --associate-public-ip-address \
         --key-name "$TAG_NAME" \
-        --user-data file://init-instance.script \
+        --user-data file://${SCRIPT_DIR}/init-instance.script \
         | json_get "['Instances'][0]['InstanceId']")
     tag "$INSTANCE_ID"
 elif [[ $NUMBER_OF_NON_TERMINATED -eq 1 ]]
