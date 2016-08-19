@@ -40,6 +40,7 @@ USER root
 
 RUN mkdir examples
 ADD examples/etag.sh /home/aws/examples/etag.sh
+ADD examples/s3diff.sh /home/aws/examples/s3diff.sh
 ADD examples/start.sh /home/aws/examples/start.sh
 ADD examples/terminate.sh /home/aws/examples/terminate.sh
 ADD examples/init-instance.script /home/aws/examples/init-instance.script
