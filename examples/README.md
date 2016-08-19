@@ -1,15 +1,8 @@
-AWS CLI Example Script
+AWS CLI Example Scripts
 ======================
 
-The example script uses the [aws cli](http://aws.amazon.com/cli) to set up an
-[EC2](http://aws.amazon.com/ec2) instance that is accessible via HTTP(S) and SSH.
+The `examples/` directory contains some scripts illustrating the AWS CLI.
 
-The script is provided in the `examples` directory in the [fstab/aws-cli](https://github.com/fstab/docker-aws-cli) Docker image.
-
-How To
-------
-
-The following commands should be run inside the [fstab/aws-cli](https://github.com/fstab/docker-aws-cli) Docker container.
 When you run the script for the first time, you need to configure the [aws cli](http://aws.amazon.com/cli) with your AWS credentials:
 
     > aws configure 
@@ -18,21 +11,10 @@ When you run the script for the first time, you need to configure the [aws cli](
     Default region name [eu-central-1]: 
     Default output format [None]: 
 
-Then, start up the [EC2](http://aws.amazon.com/ec2) instance as follows:
+start.sh / terminate.sh
+-------------------------
 
-    cd examples
-    ./start.sh
-
-When the EC2 instance is started, the script will print the public IP address.
-
-In order to clean everything up, run
-
-    ./terminate.sh
-
-What does it do?
-----------------
-
-Running an [EC2](http://aws.amazon.com/ec2) instance that is available on the Internet is a complex process requiring some preliminary steps:
+The `start.sh` script uses the [aws cli](http://aws.amazon.com/cli) to set up an [EC2](http://aws.amazon.com/ec2) instance that is accessible via HTTP(S) and SSH:
 
   1. Create a [Virtual Private Cloud (VPC)](http://aws.amazon.com/vpc) where the instance should run in.
   2. Create a subnet within the VPC where the instance should be located.
@@ -40,4 +22,12 @@ Running an [EC2](http://aws.amazon.com/ec2) instance that is available on the In
   4. Update the routing tables to use the Internet gateway.
   5. Create an SSH key pair for remote login.
 
-The `start.sh` script performs all these steps and starts an [EC2](http://aws.amazon.com/ec2) instance. The `terminate.sh` script deletes all resources that have been created with `start.sh`.
+The `terminate.sh` script terminates the EC2 instance and deletes all resources that have been created with `start.sh`.
+
+s3diff.sh / etag.sh
+-------------------
+
+`etag.sh` calculates ETags, which is something like MD5 sums for [AWS S3](http://aws.amazon.com/s3) files. When `etag.sh` is called with a local path as parameter, it calculates the expected ETag locally. When `etag.sh` is called with an S3 URL as parameter, it queries the ETag from S3.
+
+`s3diff.sh` uses `etag.sh` to recursively compare ETags from an S3 directory with a local directory.
+
