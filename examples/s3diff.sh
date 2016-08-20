@@ -18,6 +18,11 @@ else
     exit 1
 fi
 
+if [[ "$S3_DIR" != */ ]]
+then
+    S3_DIR="${S3_DIR}/"
+fi
+
 LOCAL_DIR="$2"
 
 if [[ ! -d "$LOCAL_DIR" ]]
@@ -32,8 +37,13 @@ then
 fi
 
 FILE_LIST=$(mktemp -t s3diff.XXXXXXXX)
+trap "rm $FILE_LIST" EXIT
 
-aws s3 ls --recursive "s3://${BUCKET}/${S3_DIR}" | awk '{ print $4 }' >> $FILE_LIST
+aws s3 ls --recursive "s3://${BUCKET}/${S3_DIR}" | awk '{ print $4 }' | while read path
+do
+    echo "${path#$S3_DIR}" >> $FILE_LIST
+done
+
 find "${LOCAL_DIR}" -type f | while read path
 do
     echo "${path#$LOCAL_DIR}" >> "${FILE_LIST}"
