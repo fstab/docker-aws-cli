@@ -64,7 +64,7 @@ do
         echo -e "\033[0;31m[diff]\033[0m $FILE is missing on local filesystem."
         continue
     fi
-    ETAG_S3=$($ETAG_CMD "s3://$BUCKET/$S3_DIR/$FILE" 2> /dev/null)
+    ETAG_S3=$($ETAG_CMD "s3://$BUCKET/$S3_DIR$FILE" 2> /dev/null)
     if [[ ! "$ETAG_S3" =~ ^[a-f0-9]{32}(-[0-9]+)?$ ]]
     then
         echo -e "\033[0;31m[diff]\033[0m $FILE is missing on S3."
