@@ -39,7 +39,7 @@ fi
 FILE_LIST=$(mktemp -t s3diff.XXXXXXXX)
 trap "rm $FILE_LIST" EXIT
 
-aws s3 ls --recursive "s3://${BUCKET}/${S3_DIR}" | awk '{ print $4 }' | while read path
+aws s3 ls --recursive "s3://${BUCKET}/${S3_DIR}" | sed -e 's/[-0-9]\+\s\+[:0-9]\+\s\+[0-9]\+\s//' | while read path
 do
     echo "${path#$S3_DIR}" >> $FILE_LIST
 done
