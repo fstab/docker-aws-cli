@@ -1,7 +1,7 @@
 FROM ubuntu:16.04
 MAINTAINER Fabian Stäber, fabian@fstab.de
 
-ENV LAST_UPDATE=2016-08-05
+ENV LAST_UPDATE=2016-08-21
 
 #####################################################################################
 # Current version is aws-cli/1.10.53 Python/2.7.12
