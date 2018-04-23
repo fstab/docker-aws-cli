@@ -8,7 +8,8 @@ ENV LAST_UPDATE=2016-08-21
 #####################################################################################
 
 RUN apt-get update && \
-    apt-get upgrade -y
+    apt-get upgrade -y && \
+    apt-get install -y tzdata locales
 
 # Set the timezone
 RUN echo "Europe/Berlin" | tee /etc/timezone && \
@@ -32,6 +33,7 @@ ENV PYTHONIOENCODING=UTF-8
 # python* is needed to install aws cli using pip install
 
 RUN apt-get install -y \
+    vim-nox \
     less \
     man \
     ssh \
