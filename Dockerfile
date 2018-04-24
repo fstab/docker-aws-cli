@@ -33,14 +33,15 @@ ENV PYTHONIOENCODING=UTF-8
 # python* is needed to install aws cli using pip install
 
 RUN apt-get install -y \
-    vim-nox \
     less \
     man \
     ssh \
     python \
     python-pip \
     python-virtualenv \
-    vim
+    vim \
+    vim-nox \
+    zip
 
 RUN adduser --disabled-login --gecos '' aws
 WORKDIR /home/aws
